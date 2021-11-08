@@ -56,12 +56,6 @@ class ViewController: NSViewController {
         liftEndDatePicker.timeZone = .autoupdatingCurrent
         liftEndDatePicker.dateValue = Date()
         
-        // Insert test container values
-        
-        pitchInTextView.textContainer?.textView?.insertText("ABCD1111111\nABCD2222222\nABCD3333333", replacementRange: .init(location: 0, length: 100))
-        pitchOutTextView.textContainer?.textView?.insertText("ABCD4444444\nABCD5555555\nABCD6666666", replacementRange: .init(location: 0, length: 100))
-
-        
     }
     
     @IBAction func generatePitchLetter(_ sender: Any) {
