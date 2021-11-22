@@ -18,10 +18,12 @@ class ViewController: NSViewController {
     
     @IBOutlet var vesselCodeTextField: NSTextField!
     @IBOutlet var vesselNameTextField: NSTextField!
-    @IBOutlet var sideToBerthTextField: NSTextField!
-    
+
     @IBOutlet var craneNumberPopUp: NSPopUpButton!
     let craneNumbers = ["101", "102", "103", "104", "105", "106", "107", "108", "109", "110"] // Used to populate the values of the crane number drop-down
+    
+    @IBOutlet var sideToBerthPopUp: NSPopUpButton!
+    let sides = ["Port", "Starboard"]
     
     @IBOutlet var inboundVoyageTextField: NSTextField!
     @IBOutlet var outboundVoyageTextField: NSTextField!
@@ -42,6 +44,13 @@ class ViewController: NSViewController {
         craneNumberPopUp.removeAllItems()
         craneNumberPopUp.addItems(withTitles: craneNumbers)
         craneNumberPopUp.selectItem(withTitle: "103")
+        
+        // Populate the side-to drop-down
+        // Select Port as the default
+        
+        sideToBerthPopUp.removeAllItems()
+        sideToBerthPopUp.addItems(withTitles: sides)
+        sideToBerthPopUp.selectItem(withTitle: "Port")
         
         // Set the locales of the date pickers to Zulu for zulu-formatted time
         // Retain the autoupdating current time zone of the user
@@ -117,7 +126,7 @@ class ViewController: NSViewController {
                                          name: vesselNameTextField.stringValue,
                                          iVoyage: inboundVoyageTextField.stringValue,
                                          oVoyage: outboundVoyageTextField.stringValue,
-                                         sideto: sideToBerthTextField.stringValue,
+                                         sideto: sideToBerthPopUp.selectedItem?.title ?? "Port", // Use Port as the default side-to
                                          crane: craneNumberPopUp.selectedItem?.title ?? "103", // Use 103 as a default number
                                          start: df.string(from: liftStartDatePicker.dateValue),
                                          end: df.string(from: liftEndDatePicker.dateValue),

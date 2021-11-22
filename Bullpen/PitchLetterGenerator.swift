@@ -100,6 +100,20 @@ class PitchLetterGenerator: NSObject {
         pitchOutSequenceSummary.addChild(XMLElement(name: "Direction", stringValue: "Load"))
         pitchOutSequenceSummary.addChild(XMLElement(name: "Count", stringValue: String(pitchOutContainers.count)))
         pitchOutSequenceSummary.addChild(XMLElement(name: "Length", stringValue: "40")) // Use default value of 40 for now -- maybe query EDA later?
+        
+        // Set boolean flags to determine whether lists are empty (and so if to add the relevant sequence summary)
+        
+        let pitchingIn: Bool = {
+            if pitchInSequenceSummary.elements(forName: "Count").first!.stringValue == "0" {
+                return false
+            } else { return true }
+        }()
+        
+        let pitchingOut: Bool = {
+            if pitchOutSequenceSummary.elements(forName: "Count").first!.stringValue == "0" {
+                return false
+            } else { return true }
+        }()
 
         
         // Add the sequence summaries to the appropriate crane sequences
@@ -145,7 +159,9 @@ class PitchLetterGenerator: NSObject {
                 
             }
             
-            rootElement.addChild(pitchInCraneSequence) // Add the CraneSequence to the QCWorkLetter
+            if pitchingIn {
+                rootElement.addChild(pitchInCraneSequence) // Add the CraneSequence to the QCWorkLetter
+            }
             
             // Add the text to the pitch out crane sequence
             
@@ -171,7 +187,10 @@ class PitchLetterGenerator: NSObject {
 
             }
             
-            rootElement.addChild(pitchOutCraneSequence) // Add the CraneSequence to the QCWorkLetter
+            
+            if pitchingOut {
+                rootElement.addChild(pitchOutCraneSequence) // Add the CraneSequence to the QCWorkLetter
+            }
             
             writeXML(root: rootElement)
 
