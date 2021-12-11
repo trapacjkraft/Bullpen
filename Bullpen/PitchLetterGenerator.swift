@@ -23,8 +23,13 @@ class PitchLetterGenerator: NSObject {
     
     var isCycling = Bool()
     
-    var pitchInContainers = [String]()
-    var pitchOutContainers = [String]()
+    var pitchInContainerNames = [String]()
+    var pitchOutContainerNames = [String]()
+    
+    var pitchInContainers = [EDAContainer]()
+    var pitchOutContainers = [EDAContainer]()
+
+    var nmoReceived = false
     
     var df = DateFormatter()
     
@@ -40,23 +45,55 @@ class PitchLetterGenerator: NSObject {
         liftStart = start
         liftEnd = end
         
-        pitchInContainers = pitchins
-        pitchOutContainers = pitchouts
+        pitchInContainerNames = pitchins
+        pitchOutContainerNames = pitchouts
         
         isCycling = cycling
         
     }
     
+    func getEDAContainers() {
+        
+        var edaContainerRequestNames = [String]()
+        
+        if !pitchInContainerNames.isEmpty {
+            edaContainerRequestNames = edaContainerRequestNames + pitchInContainerNames
+        }
+        
+        if !pitchOutContainerNames.isEmpty {
+            edaContainerRequestNames = edaContainerRequestNames + pitchOutContainerNames
+        }
+        
+        requestEDAContainers(names: edaContainerRequestNames)
+    }
+    
+    @objc func nmoWasReceived() {
+        nmoReceived = true
+    }
+    
     // Write the XML data
     
-    func generateXMLData() {
+    @objc func generateXMLData() {
+        
+        guard !nmoReceived else {
+            let alert = NSAlert()
+            alert.messageText = "Invalid container(s)!"
+            let info = nmos.joined(separator: ", ")
+            alert.informativeText = "The following containers in your lists are invalid: \n \(info).\n\nPlease check the container IDs and try again."
+            alert.runModal()
+            edaContainers.removeAll()
+            nmos.removeAll()
+            nmoReceived = false
+            return
+        }
+        
+        // Filter the edaContainers by list
+        self.pitchInContainers = edaContainers.filter( { self.pitchInContainerNames.contains($0.name) } )
+        self.pitchOutContainers = edaContainers.filter( { self.pitchOutContainerNames.contains($0.name) } )
         
         // Create the root element
-        
+
         let rootElement = XMLElement(name: "QCWorkLetter")
-        
-        // Create the XML document
-        // Set the version and encoding
         
         
         // Add the letter options as child elements
@@ -93,12 +130,12 @@ class PitchLetterGenerator: NSObject {
         
         let pitchInSequenceSummary = XMLElement(name: "SequenceSummary")
         pitchInSequenceSummary.addChild(XMLElement(name: "Direction", stringValue: "Discharge"))
-        pitchInSequenceSummary.addChild(XMLElement(name: "Count", stringValue: String(pitchInContainers.count)))
+        pitchInSequenceSummary.addChild(XMLElement(name: "Count", stringValue: String(pitchInContainerNames.count)))
         pitchInSequenceSummary.addChild(XMLElement(name: "Length", stringValue: "40")) // Use default value of 40 for now -- maybe query EDA later?
         
         let pitchOutSequenceSummary = XMLElement(name: "SequenceSummary")
         pitchOutSequenceSummary.addChild(XMLElement(name: "Direction", stringValue: "Load"))
-        pitchOutSequenceSummary.addChild(XMLElement(name: "Count", stringValue: String(pitchOutContainers.count)))
+        pitchOutSequenceSummary.addChild(XMLElement(name: "Count", stringValue: String(pitchOutContainerNames.count)))
         pitchOutSequenceSummary.addChild(XMLElement(name: "Length", stringValue: "40")) // Use default value of 40 for now -- maybe query EDA later?
         
         // Set boolean flags to determine whether lists are empty (and so if to add the relevant sequence summary)
@@ -124,8 +161,8 @@ class PitchLetterGenerator: NSObject {
             cycleCraneSequence.addChild(pitchInSequenceSummary)
             cycleCraneSequence.addChild(pitchOutSequenceSummary)
         }
-        
-        
+                
+                
         // Determine whether or not the letter should be generated as a cycle
         
         if !isCycling {
@@ -136,10 +173,11 @@ class PitchLetterGenerator: NSObject {
             
             // Then repeat the process for the pitch outs.
                         
-            let pitchInText = XMLElement(name: "Text", stringValue: "Pitch-In Letter for \(pitchInContainers.count) containers.")
+            let pitchInText = XMLElement(name: "Text", stringValue: "Pitch-In Letter for \(pitchInContainerNames.count) containers.")
             pitchInCraneSequence.addChild(pitchInText)
             
             var pitchInStow = 990000 // Set a variable for the stow position. Increment by 1.
+            
             
             for container in pitchInContainers {
                 
@@ -149,15 +187,16 @@ class PitchLetterGenerator: NSObject {
                 
                 let plannedLift = XMLElement(name: "PlannedLift")
                 let dischargeElement = XMLElement(name: "DischargeContainerToAutomation")
-                dischargeElement.addChild(XMLElement(name: "ContainerName", stringValue: container)) // Use the container name from the loop
+                dischargeElement.addChild(XMLElement(name: "ContainerName", stringValue: container.name)) // Use the container name from the loop
                 dischargeElement.addChild(XMLElement(name: "StowPosition", stringValue: String(pitchInStow))) // Cast the stow position to String
                 dischargeElement.addChild(XMLElement(name: "DoorDirection", stringValue: "North")) // Use north as default for now
-                dischargeElement.addChild(XMLElement(name: "IsoCode", stringValue: "45G1")) // Use 45G1 as default for now -- maybe query EDA later?
+                dischargeElement.addChild(XMLElement(name: "IsoCode", stringValue: container.crossbowISOCode))
                 pitchInStow += 1 // increment the pitch-in stow position
                 plannedLift.addChild(dischargeElement)  // Add the discharge element to PlannedLift
                 pitchInCraneSequence.addChild(plannedLift) // Add PlannedLift to the CraneSequence
                 
             }
+
             
             if pitchingIn {
                 rootElement.addChild(pitchInCraneSequence) // Add the CraneSequence to the QCWorkLetter
@@ -165,7 +204,7 @@ class PitchLetterGenerator: NSObject {
             
             // Add the text to the pitch out crane sequence
             
-            let pitchOutText = XMLElement(name: "Text", stringValue: "Pitch-Out Letter for \(pitchOutContainers.count) containers.")
+            let pitchOutText = XMLElement(name: "Text", stringValue: "Pitch-Out Letter for \(pitchOutContainerNames.count) containers.")
             pitchOutCraneSequence.addChild(pitchOutText)
             
             var pitchOutStow = 980000
@@ -177,10 +216,10 @@ class PitchLetterGenerator: NSObject {
                 
                 let plannedLift = XMLElement(name: "PlannedLift")
                 let loadElement = XMLElement(name: "LoadContainerFromAutomation")
-                loadElement.addChild(XMLElement(name: "ContainerName", stringValue: container)) // Use the container name from the loop
+                loadElement.addChild(XMLElement(name: "ContainerName", stringValue: container.name)) // Use the container name from the loop
                 loadElement.addChild(XMLElement(name: "StowPosition", stringValue: String(pitchOutStow))) // Cast the stow position to String
                 loadElement.addChild(XMLElement(name: "DoorDirection", stringValue: "North")) // Use north as default for now
-                loadElement.addChild(XMLElement(name: "IsoCode", stringValue: "45G1")) // Use 45G1 as default for now -- maybe query EDA later?
+                loadElement.addChild(XMLElement(name: "IsoCode", stringValue: container.crossbowISOCode))
                 pitchOutStow += 1 // increment the pitch-in stow position
                 plannedLift.addChild(loadElement)
                 pitchOutCraneSequence.addChild(plannedLift)
@@ -203,9 +242,9 @@ class PitchLetterGenerator: NSObject {
             var pitchOutContainersLonger = false
             var listsAreSameLength = false
             
-            if pitchInContainers.count > pitchOutContainers.count {
+            if pitchInContainerNames.count > pitchOutContainerNames.count {
                 pitchInContainersLonger = true
-            } else if pitchInContainers.count < pitchOutContainers.count {
+            } else if pitchInContainerNames.count < pitchOutContainerNames.count {
                 pitchOutContainersLonger = true
             } else {
                 listsAreSameLength = true
@@ -213,7 +252,7 @@ class PitchLetterGenerator: NSObject {
             
             // Append the text sequence
             
-            let cycleText = XMLElement(name: "Text", stringValue: "Cycle Pitch Letter for \(pitchInContainers.count) pitch-ins and \(pitchOutContainers.count) pitch-outs.")
+            let cycleText = XMLElement(name: "Text", stringValue: "Cycle Pitch Letter for \(pitchInContainerNames.count) pitch-ins and \(pitchOutContainerNames.count) pitch-outs.")
             cycleCraneSequence.addChild(cycleText)
 
             // Create the stow position
@@ -229,20 +268,20 @@ class PitchLetterGenerator: NSObject {
                     
                     let plannedDischargeLift = XMLElement(name: "PlannedLift")
                     let dischargeElement = XMLElement(name: "DischargeContainerToAutomation")
-                    dischargeElement.addChild(XMLElement(name: "ContainerName", stringValue: pitchInContainers[i])) // Use the container name from the loop
+                    dischargeElement.addChild(XMLElement(name: "ContainerName", stringValue: pitchInContainers[i].name)) // Use the container name from the loop
                     dischargeElement.addChild(XMLElement(name: "StowPosition", stringValue: String(cycleStow))) // Cast the stow position to String
                     dischargeElement.addChild(XMLElement(name: "DoorDirection", stringValue: "North")) // Use north as default for now
-                    dischargeElement.addChild(XMLElement(name: "IsoCode", stringValue: "45G1")) // Use 45G1 as default for now -- maybe query EDA later?
+                    dischargeElement.addChild(XMLElement(name: "IsoCode", stringValue: pitchInContainers[i].crossbowISOCode))
                     cycleStow += 1 // increment the pitch-in stow position
                     plannedDischargeLift.addChild(dischargeElement)  // Add the discharge element to PlannedLift
                     cycleCraneSequence.addChild(plannedDischargeLift) // Add PlannedLift to the CraneSequence
                     
                     let plannedLoadLift = XMLElement(name: "PlannedLift")
                     let loadElement = XMLElement(name: "LoadContainerFromAutomation")
-                    loadElement.addChild(XMLElement(name: "ContainerName", stringValue: pitchOutContainers[i])) // Use the container name from the loop
+                    loadElement.addChild(XMLElement(name: "ContainerName", stringValue: pitchOutContainers[i].name)) // Use the container name from the loop
                     loadElement.addChild(XMLElement(name: "StowPosition", stringValue: String(cycleStow))) // Cast the stow position to String
                     loadElement.addChild(XMLElement(name: "DoorDirection", stringValue: "North")) // Use north as default for now
-                    loadElement.addChild(XMLElement(name: "IsoCode", stringValue: "45G1")) // Use 45G1 as default for now -- maybe query EDA later?
+                    loadElement.addChild(XMLElement(name: "IsoCode", stringValue: pitchOutContainers[i].crossbowISOCode))
                     cycleStow += 1 // increment the pitch-in stow position
                     plannedLoadLift.addChild(loadElement)  // Add the discharge element to PlannedLift
                     cycleCraneSequence.addChild(plannedLoadLift) // Add PlannedLift to the CraneSequence
@@ -270,10 +309,10 @@ class PitchLetterGenerator: NSObject {
                         
                         let plannedDischargeLift = XMLElement(name: "PlannedLift")
                         let dischargeElement = XMLElement(name: "DischargeContainerToAutomation")
-                        dischargeElement.addChild(XMLElement(name: "ContainerName", stringValue: pitchInContainers[i])) // Use the container name from the loop
+                        dischargeElement.addChild(XMLElement(name: "ContainerName", stringValue: pitchInContainers[i].name)) // Use the container name from the loop
                         dischargeElement.addChild(XMLElement(name: "StowPosition", stringValue: String(cycleStow))) // Cast the stow position to String
                         dischargeElement.addChild(XMLElement(name: "DoorDirection", stringValue: "North")) // Use north as default for now
-                        dischargeElement.addChild(XMLElement(name: "IsoCode", stringValue: "45G1")) // Use 45G1 as default for now -- maybe query EDA later?
+                        dischargeElement.addChild(XMLElement(name: "IsoCode", stringValue: pitchInContainers[i].crossbowISOCode))
                         cycleStow += 1 // increment the pitch-in stow position
                         plannedDischargeLift.addChild(dischargeElement)  // Add the discharge element to PlannedLift
                         cycleCraneSequence.addChild(plannedDischargeLift) // Add PlannedLift to the CraneSequence
@@ -281,10 +320,10 @@ class PitchLetterGenerator: NSObject {
                         if i <= pitchOutContainers.count - 1 {
                             let plannedLoadLift = XMLElement(name: "PlannedLift")
                             let loadElement = XMLElement(name: "LoadContainerFromAutomation")
-                            loadElement.addChild(XMLElement(name: "ContainerName", stringValue: pitchOutContainers[i])) // Use the container name from the loop
+                            loadElement.addChild(XMLElement(name: "ContainerName", stringValue: pitchOutContainers[i].name)) // Use the container name from the loop
                             loadElement.addChild(XMLElement(name: "StowPosition", stringValue: String(cycleStow))) // Cast the stow position to String
                             loadElement.addChild(XMLElement(name: "DoorDirection", stringValue: "North")) // Use north as default for now
-                            loadElement.addChild(XMLElement(name: "IsoCode", stringValue: "45G1")) // Use 45G1 as default for now -- maybe query EDA later?
+                            loadElement.addChild(XMLElement(name: "IsoCode", stringValue: pitchOutContainers[i].crossbowISOCode))
                             cycleStow += 1 // increment the pitch-in stow position
                             plannedLoadLift.addChild(loadElement)  // Add the discharge element to PlannedLift
                             cycleCraneSequence.addChild(plannedLoadLift) // Add PlannedLift to the CraneSequence
@@ -299,10 +338,10 @@ class PitchLetterGenerator: NSObject {
                         if i <= pitchInContainers.count - 1 {
                             let plannedDischargeLift = XMLElement(name: "PlannedLift")
                             let dischargeElement = XMLElement(name: "DischargeContainerToAutomation")
-                            dischargeElement.addChild(XMLElement(name: "ContainerName", stringValue: pitchInContainers[i])) // Use the container name from the loop
+                            dischargeElement.addChild(XMLElement(name: "ContainerName", stringValue: pitchInContainers[i].name)) // Use the container name from the loop
                             dischargeElement.addChild(XMLElement(name: "StowPosition", stringValue: String(cycleStow))) // Cast the stow position to String
                             dischargeElement.addChild(XMLElement(name: "DoorDirection", stringValue: "North")) // Use north as default for now
-                            dischargeElement.addChild(XMLElement(name: "IsoCode", stringValue: "45G1")) // Use 45G1 as default for now -- maybe query EDA later?
+                            dischargeElement.addChild(XMLElement(name: "IsoCode", stringValue: pitchInContainers[i].crossbowISOCode))
                             cycleStow += 1 // increment the pitch-in stow position
                             plannedDischargeLift.addChild(dischargeElement)  // Add the discharge element to PlannedLift
                             cycleCraneSequence.addChild(plannedDischargeLift) // Add PlannedLift to the CraneSequence
@@ -310,10 +349,10 @@ class PitchLetterGenerator: NSObject {
 
                         let plannedLoadLift = XMLElement(name: "PlannedLift")
                         let loadElement = XMLElement(name: "LoadContainerFromAutomation")
-                        loadElement.addChild(XMLElement(name: "ContainerName", stringValue: pitchOutContainers[i])) // Use the container name from the loop
+                        loadElement.addChild(XMLElement(name: "ContainerName", stringValue: pitchOutContainers[i].name)) // Use the container name from the loop
                         loadElement.addChild(XMLElement(name: "StowPosition", stringValue: String(cycleStow))) // Cast the stow position to String
                         loadElement.addChild(XMLElement(name: "DoorDirection", stringValue: "North")) // Use north as default for now
-                        loadElement.addChild(XMLElement(name: "IsoCode", stringValue: "45G1")) // Use 45G1 as default for now -- maybe query EDA later?
+                        loadElement.addChild(XMLElement(name: "IsoCode", stringValue: pitchOutContainers[i].crossbowISOCode)) // Use 45G1 as default for now -- maybe query EDA later?
                         cycleStow += 1 // increment the pitch-in stow position
                         plannedLoadLift.addChild(loadElement)  // Add the discharge element to PlannedLift
                         cycleCraneSequence.addChild(plannedLoadLift) // Add PlannedLift to the CraneSequence

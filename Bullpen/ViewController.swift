@@ -65,6 +65,11 @@ class ViewController: NSViewController {
         liftEndDatePicker.timeZone = .autoupdatingCurrent
         liftEndDatePicker.dateValue = Date()
         
+        // Add a notification observer for when the STOMPKit is done processing
+        
+        NotificationCenter.default.addObserver(letterGenerator, selector: #selector(letterGenerator.nmoWasReceived), name: .nmoReceived, object: nil)
+        NotificationCenter.default.addObserver(letterGenerator, selector: #selector(letterGenerator.generateXMLData), name: .allEDARequestsReceived, object: nil)
+        
     }
     
     @IBAction func generatePitchLetter(_ sender: Any) {
@@ -72,35 +77,39 @@ class ViewController: NSViewController {
         // Create an array of container names by separating the text field on newlines. If this fails, create an empty array.
         // Loop through the array and find any empty lines that may have arrived from copy-pasting or extra lines in lists, and remove empty entries.
         
-        var pitchInContainers = pitchInTextView.textContainer?.textView?.string.components(separatedBy: "\n") ?? []
+        var pitchInContainerNames = pitchInTextView.textContainer?.textView?.string.components(separatedBy: "\n") ?? []
         
         var emptyIndex = [Int]()
         
-        for (i, container) in pitchInContainers.enumerated() {
+        for (i, container) in pitchInContainerNames.enumerated() {
             if container.isEmpty {
                 emptyIndex.append(i)
             }
         }
         
         for index in emptyIndex.reversed() {
-            pitchInContainers.remove(at: index)
+            pitchInContainerNames.remove(at: index)
         }
+        
+        pitchInCount = pitchInContainerNames.count
         
         // Reset the index tracker and repeat the above process for the pitch out containers.
         
         emptyIndex.removeAll()
         
-        var pitchOutContainers = pitchOutTextView.textContainer?.textView?.string.components(separatedBy: "\n") ?? []
+        var pitchOutContainerNames = pitchOutTextView.textContainer?.textView?.string.components(separatedBy: "\n") ?? []
         
-        for (i, container) in pitchOutContainers.enumerated() {
+        for (i, container) in pitchOutContainerNames.enumerated() {
             if container.isEmpty {
                 emptyIndex.append(i)
             }
         }
         
         for index in emptyIndex.reversed() {
-            pitchOutContainers.remove(at: index)
+            pitchOutContainerNames.remove(at: index)
         }
+        
+        pitchOutCount = pitchOutContainerNames.count
 
         // Use a date formatter to format the strings for LiftStart and LiftEnd
         // Use the UTC time zone to automatically convert from the user's time
@@ -119,7 +128,6 @@ class ViewController: NSViewController {
             isCycling = false
         }
         
-        
         // Pass the letter options and container lists to the XML generator.
         
         letterGenerator.getLetterOptions(code: vesselCodeTextField.stringValue,
@@ -130,10 +138,13 @@ class ViewController: NSViewController {
                                          crane: craneNumberPopUp.selectedItem?.title ?? "103", // Use 103 as a default number
                                          start: df.string(from: liftStartDatePicker.dateValue),
                                          end: df.string(from: liftEndDatePicker.dateValue),
-                                         pitchins: pitchInContainers,
-                                         pitchouts: pitchOutContainers,
+                                         pitchins: pitchInContainerNames,
+                                         pitchouts: pitchOutContainerNames,
                                          cycling: isCycling)
-        letterGenerator.generateXMLData()
+        
+        
+        letterGenerator.getEDAContainers()
+//        letterGenerator.generateXMLData()
         
     }
     

@@ -1,0 +1,214 @@
+//
+//  TLSClientSocket.m
+//  NetworkKit
+//
+//  Created by Karl Kraft on 5/4/19.
+//  Copyright 2019-2020 Karl Kraft. All rights reserved.
+//
+
+#import "TLSClientSocket.h"
+#import "NetworkException.h"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wauto-import"
+#pragma clang diagnostic ignored "-Wreserved-id-macro"
+#pragma clang diagnostic ignored "-Wpadded"
+#import <openssl/ssl.h>
+#pragma clang diagnostic pop
+
+
+@implementation TLSClientSocket
+{
+  SSL_CTX* ctx;
+  SSL *ssl;
+
+}
+- (void)bindToLocalPort:(unsigned short)port
+{
+  @throw [NetworkException exceptionWithName:@"NOT_IMPLEMENTED" reason:@"TLSClientSocket cannot be used as a server socket" userInfo:nil];
+}
+
+- (void)setNonBlocking
+{
+  @throw [NetworkException exceptionWithName:@"NOT_IMPLEMENTED" reason:@"TLSClientSocket cannot be used as a server socket" userInfo:nil];
+}
+
+- (void)listen
+{
+  @throw [NetworkException exceptionWithName:@"NOT_IMPLEMENTED" reason:@"TLSClientSocket cannot be used as a server socket" userInfo:nil];
+}
+
+- (TCPSocket *)accept
+{
+  @throw [NetworkException exceptionWithName:@"NOT_IMPLEMENTED" reason:@"TLSClientSocket cannot be used as a server socket" userInfo:nil];
+}
+
++ (void)initialize
+{
+  SSL_library_init();
+  SSL_load_error_strings();
+  ERR_load_BIO_strings();
+  OpenSSL_add_all_algorithms();
+}
+
+
+- (void)connectToHost:(NSString *)aHost port:(unsigned short)port
+{
+  [super connectToHost:aHost port:port];
+
+  //
+  int res = 1;
+
+  ctx = SSL_CTX_new(SSLv23_client_method());
+  if (!ctx) {
+    @throw [NetworkException exceptionWithName:@"TLSClientSocket" reason:@"Failed: SSL_CTX_new()" userInfo:nil];
+  }
+
+  SSL_CTX_set_options(ctx, SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3|SSL_OP_NO_TLSv1|SSL_OP_NO_TLSv1_1);
+
+  if( SSL_CTX_load_verify_locations(ctx, "/etc/ssl/cert.pem",NULL) != 1) {    // load certs in a directory
+    @throw [NetworkException exceptionWithName:@"TLSClientSocket" reason:@"Failed: SSL_CTX_load_verify_locations()" userInfo:nil];
+  }
+
+  SSL_CTX_set_verify(ctx, SSL_VERIFY_PEER, NULL);
+
+  ssl = SSL_new(ctx);
+
+  if (!ssl) {
+    @throw [NetworkException exceptionWithName:@"TLSClientSocket" reason:@"Failed: SSL_new()" userInfo:nil];
+  }
+
+  res = SSL_set_fd(ssl, self.fileDescriptor);
+
+  if (res !=1) {
+    @throw [NetworkException exceptionWithName:@"TLSClientSocket" reason:@"Failed: SSL_set_fd()" userInfo:nil];
+  }
+
+
+  res = SSL_connect(ssl);
+  if (res != 1) {
+    int sslError=SSL_get_error(ssl,res);
+    NSString *failure=[NSString stringWithFormat:@"Failed: SSL_connect() error: %d",sslError];
+    [self close];
+    @throw [NetworkException exceptionWithName:@"TLSClientSocket" reason:failure userInfo:nil];
+  }
+
+
+  /* Step 1: verify a server certificate was presented during the negotiation */
+  X509* cert = SSL_get_peer_certificate(ssl);
+  if(!cert) {
+    [self close];
+    @throw [NetworkException exceptionWithName:@"TLSClientSocket" reason:@"Failed: SSL_get_peer_certificate()" userInfo:nil];
+  } else {
+    X509_free(cert);
+  }
+
+  /* Step 2: verify the result of chain verification */
+  /* Verification performed according to RFC 4158    */
+  long lres = SSL_get_verify_result(ssl);
+  if(lres!= X509_V_OK){
+    [self close];
+    @throw [NetworkException exceptionWithName:@"TLSClientSocket" reason:@"Failed: SSL_get_verify_result()" userInfo:nil];
+  }
+
+  // TODO -verify CN matches host name
+}
+
+
+//// read timeout
+//- (void)setReadTimeout:(NSUInteger)timeoutInMS
+//{
+//
+//}
+//
+
+- (void)writeBytes:(const UInt8 *)bytes length:(NSUInteger)length
+{
+  while (length) {
+    int numWritten=SSL_write(ssl, bytes, (int)length);
+    if (numWritten<0) {
+      @throw [NetworkException exceptionWithName:@"WritingFailed" reason:@"Writing failed" userInfo:NULL];
+    } else if (numWritten < (ssize_t)length) {
+//      logEvent(&WARNING,@"TCPSocket", @"short write %ld of %ld",(unsigned long)numWritten,(unsigned long)length);
+    }
+    length=length-(size_t)numWritten;
+    bytes=bytes+numWritten;
+  }
+}
+
+
+- (ssize_t)readAvailableBytes:(NSUInteger)count intoBuffer:(void *)buf
+{
+  ssize_t numRead=SSL_read(ssl, buf, (int)count);
+  if (numRead<0) {
+    if (errno==EAGAIN) {
+      return 0;
+    } else {
+      @throw [NetworkException exceptionWithName:@"ReadingFailed" reason:@"Reading failed" userInfo:NULL];
+    }
+  }
+  return numRead;
+}
+
+- (ssize_t)readBytes:(NSUInteger)count intoBuffer:(void *)buf
+{
+  char *startOfNextByteGroup=buf;
+  ssize_t totalRead=0;
+  while (count) {
+    ssize_t numRead=SSL_read(ssl, startOfNextByteGroup, (int)count);
+    if (numRead<0) {
+      if (errno==EAGAIN) {
+        break;
+      } else if (errno==EFAULT) {
+        @throw [NetworkException exceptionWithName:@"ReadingFailed" reason:@"Reading failed" userInfo:NULL];
+      } else  {
+        @throw [NetworkException exceptionWithName:@"ReadingFailed" reason:@"Reading failed" userInfo:NULL];
+      }
+    } else if (numRead>0) {
+      count=count-(size_t)numRead;
+      totalRead=totalRead+numRead;
+      startOfNextByteGroup=startOfNextByteGroup+numRead;
+    } else {
+      break;
+    }
+  }
+  return totalRead;
+}
+
+- (NSData *)readData
+{
+  char buf[8192];
+
+  ssize_t numRead=SSL_read(ssl, buf, (int)8192);
+  if (numRead>0) {
+    return [NSData dataWithBytes:buf length:(NSUInteger)numRead];
+  } else if (numRead<0) {
+    if (errno==EAGAIN) {
+      return [NSData data];
+    } else {
+      @throw [NetworkException exceptionWithName:@"ReadingFailed" reason:@"Reading failed" userInfo:NULL];
+    }
+  } else {
+    @throw [NetworkException exceptionWithName:@"ReadingFailed" reason:@"End of File" userInfo:NULL];
+  }
+}
+
+
+- (NSString *)readStringWithEncoding:(NSStringEncoding)encoding
+{
+  NSString *s=nil;
+  NSMutableData *accumulator = [NSMutableData data];
+  UInt8 *buf=malloc(1024);
+  while (!s) {
+    ssize_t numRead=SSL_read(ssl, buf, (int)1024);
+    if (numRead<0 && errno!= EAGAIN) {
+      @throw [NetworkException exceptionWithName:@"ReadingFailed" reason:@"Reading failed" userInfo:NULL];
+    } else {
+      if (numRead>0) [accumulator appendBytes:buf length:(size_t)numRead];
+    }
+    s=[[NSString alloc] initWithData:accumulator encoding:encoding];
+  }
+  free(buf);
+  return s;
+}
+
+@end

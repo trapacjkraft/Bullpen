@@ -11,6 +11,58 @@
 		427B80E6273774D9002B5C03 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427B80E5273774D9002B5C03 /* ViewController.swift */; };
 		427B80E8273774DB002B5C03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 427B80E7273774DB002B5C03 /* Assets.xcassets */; };
 		427B80EB273774DB002B5C03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 427B80E9273774DB002B5C03 /* Main.storyboard */; };
+		428A83DF27630FD70090A741 /* Bullpen.xoc in Resources */ = {isa = PBXBuildFile; fileRef = 428A83DE27630FD70090A741 /* Bullpen.xoc */; };
+		428A8431276311230090A741 /* xoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A83E6276311220090A741 /* xoc.m */; };
+		428A8432276311230090A741 /* sample_build_script.txt in Resources */ = {isa = PBXBuildFile; fileRef = 428A83E7276311220090A741 /* sample_build_script.txt */; };
+		428A8433276311230090A741 /* xoc-64.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A83EC276311220090A741 /* xoc-64.m */; };
+		428A8434276311230090A741 /* xoc-plist.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A83F1276311220090A741 /* xoc-plist.m */; };
+		428A8435276311230090A741 /* XSDTimeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A83F2276311220090A741 /* XSDTimeParser.m */; };
+		428A8436276311230090A741 /* xoc-unmarshall.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A83F3276311220090A741 /* xoc-unmarshall.m */; };
+		428A8437276311230090A741 /* XSDDateParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A83F4276311220090A741 /* XSDDateParser.m */; };
+		428A8438276311230090A741 /* xoc-marshall.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A83F5276311220090A741 /* xoc-marshall.m */; };
+		428A8439276311230090A741 /* XocException.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A83F7276311220090A741 /* XocException.m */; };
+		428A843A276311230090A741 /* XocStateException.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A83F8276311220090A741 /* XocStateException.m */; };
+		428A843B276311230090A741 /* XocParseException.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A83FC276311220090A741 /* XocParseException.m */; };
+		428A843C276311230090A741 /* XocArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8401276311220090A741 /* XocArray.m */; };
+		428A843D276311230090A741 /* XocAnyElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8402276311220090A741 /* XocAnyElement.m */; };
+		428A843E276311230090A741 /* xoc-facets.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8404276311220090A741 /* xoc-facets.m */; };
+		428A843F276311230090A741 /* TCPStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8409276311230090A741 /* TCPStream.m */; };
+		428A8440276311230090A741 /* TCPSocketServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A840D276311230090A741 /* TCPSocketServer.m */; };
+		428A8442276311230090A741 /* TCPSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8411276311230090A741 /* TCPSocket.m */; };
+		428A8443276311230090A741 /* NetworkException.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8412276311230090A741 /* NetworkException.m */; };
+		428A8444276311230090A741 /* NetworkMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8414276311230090A741 /* NetworkMatcher.m */; };
+		428A8445276311230090A741 /* UDPSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8415276311230090A741 /* UDPSocket.m */; };
+		428A8446276311230090A741 /* TCPSocketClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8416276311230090A741 /* TCPSocketClient.m */; };
+		428A8447276311230090A741 /* StompClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A841A276311230090A741 /* StompClient.m */; };
+		428A8448276311230090A741 /* StompXMLConsumer.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A841B276311230090A741 /* StompXMLConsumer.m */; };
+		428A844A276311230090A741 /* StompDefaultDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8420276311230090A741 /* StompDefaultDelegate.m */; };
+		428A844B276311230090A741 /* StompXocFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8422276311230090A741 /* StompXocFrame.m */; };
+		428A844C276311230090A741 /* StompException.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8427276311230090A741 /* StompException.m */; };
+		428A844D276311230090A741 /* StompFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8428276311230090A741 /* StompFrame.m */; };
+		428A844E276311230090A741 /* StompPipeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8429276311230090A741 /* StompPipeline.m */; };
+		428A844F276311230090A741 /* NSApplication+StompClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A842A276311230090A741 /* NSApplication+StompClient.m */; };
+		428A8450276311230090A741 /* StompServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A842E276311230090A741 /* StompServer.m */; };
+		428A8451276311230090A741 /* stomp.plist in Resources */ = {isa = PBXBuildFile; fileRef = 428A8430276311230090A741 /* stomp.plist */; };
+		428A845A2763113D0090A741 /* QLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A84552763113D0090A741 /* QLog.m */; };
+		428A845B2763113D0090A741 /* ETRaise.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A84562763113D0090A741 /* ETRaise.m */; };
+		428A845C2763113D0090A741 /* ETErrorSpot.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A84572763113D0090A741 /* ETErrorSpot.m */; };
+		428A847F276311CC0090A741 /* Dangerous.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8461276311CC0090A741 /* Dangerous.m */; };
+		428A8480276311CC0090A741 /* Refrigerated.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8462276311CC0090A741 /* Refrigerated.m */; };
+		428A8481276311CC0090A741 /* EDAPreplanRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8466276311CC0090A741 /* EDAPreplanRequest.m */; };
+		428A8482276311CC0090A741 /* PreplanSpecification.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8467276311CC0090A741 /* PreplanSpecification.m */; };
+		428A8483276311CC0090A741 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A846C276311CC0090A741 /* Location.m */; };
+		428A8484276311CC0090A741 /* Departure.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A846E276311CC0090A741 /* Departure.m */; };
+		428A8485276311CC0090A741 /* NoMatchingObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A846F276311CC0090A741 /* NoMatchingObjects.m */; };
+		428A8486276311CC0090A741 /* OverWidth.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8470276311CC0090A741 /* OverWidth.m */; };
+		428A8487276311CC0090A741 /* Cargo.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8471276311CC0090A741 /* Cargo.m */; };
+		428A8488276311CC0090A741 /* Arrival.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8472276311CC0090A741 /* Arrival.m */; };
+		428A8489276311CC0090A741 /* OverDimension.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8475276311CC0090A741 /* OverDimension.m */; };
+		428A848A276311CC0090A741 /* VesselStowage.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8476276311CC0090A741 /* VesselStowage.m */; };
+		428A848B276311CC0090A741 /* EDAContainerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A847A276311CC0090A741 /* EDAContainerRequest.m */; };
+		428A848C276311CC0090A741 /* OverLength.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A847B276311CC0090A741 /* OverLength.m */; };
+		428A848D276311CC0090A741 /* EDAContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A847E276311CC0090A741 /* EDAContainer.m */; };
+		428A849A2763158C0090A741 /* Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428A84992763158C0090A741 /* Commons.swift */; };
+		428A84A627631AA70090A741 /* BullpenConsumer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428A84A527631AA70090A741 /* BullpenConsumer.swift */; };
 		42BA079A2737BA0700A53B86 /* PitchLetterGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BA07992737BA0700A53B86 /* PitchLetterGenerator.swift */; };
 /* End PBXBuildFile section */
 
@@ -22,6 +74,113 @@
 		427B80EA273774DB002B5C03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		427B80EC273774DB002B5C03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		427B80ED273774DB002B5C03 /* Bullpen.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bullpen.entitlements; sourceTree = "<group>"; };
+		428A83DB27630F430090A741 /* Bullpen-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bullpen-Bridging-Header.h"; sourceTree = "<group>"; };
+		428A83DE27630FD70090A741 /* Bullpen.xoc */ = {isa = PBXFileReference; lastKnownFileType = text; path = Bullpen.xoc; sourceTree = "<group>"; };
+		428A83E6276311220090A741 /* xoc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = xoc.m; sourceTree = "<group>"; };
+		428A83E7276311220090A741 /* sample_build_script.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sample_build_script.txt; sourceTree = "<group>"; };
+		428A83E8276311220090A741 /* xoc-libxml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "xoc-libxml.h"; sourceTree = "<group>"; };
+		428A83EA276311220090A741 /* xoc-plist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "xoc-plist.h"; sourceTree = "<group>"; };
+		428A83EB276311220090A741 /* XSDTimeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XSDTimeParser.h; sourceTree = "<group>"; };
+		428A83EC276311220090A741 /* xoc-64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "xoc-64.m"; sourceTree = "<group>"; };
+		428A83ED276311220090A741 /* xoc-unmarshall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "xoc-unmarshall.h"; sourceTree = "<group>"; };
+		428A83EE276311220090A741 /* XSDDateParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XSDDateParser.h; sourceTree = "<group>"; };
+		428A83EF276311220090A741 /* xoc-marshall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "xoc-marshall.h"; sourceTree = "<group>"; };
+		428A83F0276311220090A741 /* xoc-64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "xoc-64.h"; sourceTree = "<group>"; };
+		428A83F1276311220090A741 /* xoc-plist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "xoc-plist.m"; sourceTree = "<group>"; };
+		428A83F2276311220090A741 /* XSDTimeParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XSDTimeParser.m; sourceTree = "<group>"; };
+		428A83F3276311220090A741 /* xoc-unmarshall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "xoc-unmarshall.m"; sourceTree = "<group>"; };
+		428A83F4276311220090A741 /* XSDDateParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XSDDateParser.m; sourceTree = "<group>"; };
+		428A83F5276311220090A741 /* xoc-marshall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "xoc-marshall.m"; sourceTree = "<group>"; };
+		428A83F7276311220090A741 /* XocException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XocException.m; sourceTree = "<group>"; };
+		428A83F8276311220090A741 /* XocStateException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XocStateException.m; sourceTree = "<group>"; };
+		428A83F9276311220090A741 /* XocParseException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XocParseException.h; sourceTree = "<group>"; };
+		428A83FA276311220090A741 /* XocStateException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XocStateException.h; sourceTree = "<group>"; };
+		428A83FB276311220090A741 /* XocException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XocException.h; sourceTree = "<group>"; };
+		428A83FC276311220090A741 /* XocParseException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XocParseException.m; sourceTree = "<group>"; };
+		428A83FD276311220090A741 /* xoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xoc.h; sourceTree = "<group>"; };
+		428A83FF276311220090A741 /* XocAnyElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XocAnyElement.h; sourceTree = "<group>"; };
+		428A8400276311220090A741 /* xoc-facets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "xoc-facets.h"; sourceTree = "<group>"; };
+		428A8401276311220090A741 /* XocArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XocArray.m; sourceTree = "<group>"; };
+		428A8402276311220090A741 /* XocAnyElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XocAnyElement.m; sourceTree = "<group>"; };
+		428A8403276311220090A741 /* XocArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XocArray.h; sourceTree = "<group>"; };
+		428A8404276311220090A741 /* xoc-facets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "xoc-facets.m"; sourceTree = "<group>"; };
+		428A8405276311220090A741 /* XocGeneratedClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XocGeneratedClass.h; sourceTree = "<group>"; };
+		428A8407276311230090A741 /* NetworkException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkException.h; sourceTree = "<group>"; };
+		428A8408276311230090A741 /* TCPSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPSocket.h; sourceTree = "<group>"; };
+		428A8409276311230090A741 /* TCPStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPStream.m; sourceTree = "<group>"; };
+		428A840A276311230090A741 /* UDPSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPSocket.h; sourceTree = "<group>"; };
+		428A840B276311230090A741 /* TCPSocketServer_Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPSocketServer_Config.h; sourceTree = "<group>"; };
+		428A840C276311230090A741 /* NetworkMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkMatcher.h; sourceTree = "<group>"; };
+		428A840D276311230090A741 /* TCPSocketServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPSocketServer.m; sourceTree = "<group>"; };
+		428A840F276311230090A741 /* TCPSocketClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPSocketClient.h; sourceTree = "<group>"; };
+		428A8410276311230090A741 /* TCPStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPStream.h; sourceTree = "<group>"; };
+		428A8411276311230090A741 /* TCPSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPSocket.m; sourceTree = "<group>"; };
+		428A8412276311230090A741 /* NetworkException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkException.m; sourceTree = "<group>"; };
+		428A8413276311230090A741 /* TCPSocketServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPSocketServer.h; sourceTree = "<group>"; };
+		428A8414276311230090A741 /* NetworkMatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkMatcher.m; sourceTree = "<group>"; };
+		428A8415276311230090A741 /* UDPSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPSocket.m; sourceTree = "<group>"; };
+		428A8416276311230090A741 /* TCPSocketClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPSocketClient.m; sourceTree = "<group>"; };
+		428A8417276311230090A741 /* TLSClientSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLSClientSocket.h; sourceTree = "<group>"; };
+		428A8419276311230090A741 /* StompFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StompFrame.h; sourceTree = "<group>"; };
+		428A841A276311230090A741 /* StompClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StompClient.m; sourceTree = "<group>"; };
+		428A841B276311230090A741 /* StompXMLConsumer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StompXMLConsumer.m; sourceTree = "<group>"; };
+		428A841C276311230090A741 /* StompException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StompException.h; sourceTree = "<group>"; };
+		428A841E276311230090A741 /* NSApplication+StompClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+StompClient.h"; sourceTree = "<group>"; };
+		428A841F276311230090A741 /* StompPipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StompPipeline.h; sourceTree = "<group>"; };
+		428A8420276311230090A741 /* StompDefaultDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StompDefaultDelegate.m; sourceTree = "<group>"; };
+		428A8421276311230090A741 /* StompServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StompServer.h; sourceTree = "<group>"; };
+		428A8422276311230090A741 /* StompXocFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StompXocFrame.m; sourceTree = "<group>"; };
+		428A8423276311230090A741 /* StompConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StompConsumer.h; sourceTree = "<group>"; };
+		428A8424276311230090A741 /* StompServer+LocalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StompServer+LocalConfig.h"; sourceTree = "<group>"; };
+		428A8425276311230090A741 /* StompXMLConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StompXMLConsumer.h; sourceTree = "<group>"; };
+		428A8426276311230090A741 /* StompClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StompClient.h; sourceTree = "<group>"; };
+		428A8427276311230090A741 /* StompException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StompException.m; sourceTree = "<group>"; };
+		428A8428276311230090A741 /* StompFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StompFrame.m; sourceTree = "<group>"; };
+		428A8429276311230090A741 /* StompPipeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StompPipeline.m; sourceTree = "<group>"; };
+		428A842A276311230090A741 /* NSApplication+StompClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+StompClient.m"; sourceTree = "<group>"; };
+		428A842B276311230090A741 /* StompDefaultDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StompDefaultDelegate.h; sourceTree = "<group>"; };
+		428A842C276311230090A741 /* StompXocFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StompXocFrame.h; sourceTree = "<group>"; };
+		428A842D276311230090A741 /* StompDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StompDelegate.h; sourceTree = "<group>"; };
+		428A842E276311230090A741 /* StompServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StompServer.m; sourceTree = "<group>"; };
+		428A8430276311230090A741 /* stomp.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = stomp.plist; sourceTree = "<group>"; };
+		428A84542763113D0090A741 /* ETErrorSpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETErrorSpot.h; sourceTree = "<group>"; };
+		428A84552763113D0090A741 /* QLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLog.m; sourceTree = "<group>"; };
+		428A84562763113D0090A741 /* ETRaise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETRaise.m; sourceTree = "<group>"; };
+		428A84572763113D0090A741 /* ETErrorSpot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETErrorSpot.m; sourceTree = "<group>"; };
+		428A84582763113D0090A741 /* ETRaise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETRaise.h; sourceTree = "<group>"; };
+		428A84592763113D0090A741 /* QLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLog.h; sourceTree = "<group>"; };
+		428A8461276311CC0090A741 /* Dangerous.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dangerous.m; sourceTree = "<group>"; };
+		428A8462276311CC0090A741 /* Refrigerated.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Refrigerated.m; sourceTree = "<group>"; };
+		428A8463276311CC0090A741 /* Arrival.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arrival.h; sourceTree = "<group>"; };
+		428A8464276311CC0090A741 /* OverWidth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverWidth.h; sourceTree = "<group>"; };
+		428A8465276311CC0090A741 /* Cargo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cargo.h; sourceTree = "<group>"; };
+		428A8466276311CC0090A741 /* EDAPreplanRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EDAPreplanRequest.m; sourceTree = "<group>"; };
+		428A8467276311CC0090A741 /* PreplanSpecification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreplanSpecification.m; sourceTree = "<group>"; };
+		428A8468276311CC0090A741 /* OverDimension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverDimension.h; sourceTree = "<group>"; };
+		428A8469276311CC0090A741 /* VesselStowage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VesselStowage.h; sourceTree = "<group>"; };
+		428A846A276311CC0090A741 /* OverLength.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverLength.h; sourceTree = "<group>"; };
+		428A846B276311CC0090A741 /* EDAContainerRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDAContainerRequest.h; sourceTree = "<group>"; };
+		428A846C276311CC0090A741 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		428A846D276311CC0090A741 /* EDAContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDAContainer.h; sourceTree = "<group>"; };
+		428A846E276311CC0090A741 /* Departure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Departure.m; sourceTree = "<group>"; };
+		428A846F276311CC0090A741 /* NoMatchingObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoMatchingObjects.m; sourceTree = "<group>"; };
+		428A8470276311CC0090A741 /* OverWidth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverWidth.m; sourceTree = "<group>"; };
+		428A8471276311CC0090A741 /* Cargo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cargo.m; sourceTree = "<group>"; };
+		428A8472276311CC0090A741 /* Arrival.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Arrival.m; sourceTree = "<group>"; };
+		428A8473276311CC0090A741 /* Refrigerated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Refrigerated.h; sourceTree = "<group>"; };
+		428A8474276311CC0090A741 /* Dangerous.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dangerous.h; sourceTree = "<group>"; };
+		428A8475276311CC0090A741 /* OverDimension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverDimension.m; sourceTree = "<group>"; };
+		428A8476276311CC0090A741 /* VesselStowage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VesselStowage.m; sourceTree = "<group>"; };
+		428A8477276311CC0090A741 /* PreplanSpecification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreplanSpecification.h; sourceTree = "<group>"; };
+		428A8478276311CC0090A741 /* EDAPreplanRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDAPreplanRequest.h; sourceTree = "<group>"; };
+		428A8479276311CC0090A741 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		428A847A276311CC0090A741 /* EDAContainerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EDAContainerRequest.m; sourceTree = "<group>"; };
+		428A847B276311CC0090A741 /* OverLength.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverLength.m; sourceTree = "<group>"; };
+		428A847C276311CC0090A741 /* Departure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Departure.h; sourceTree = "<group>"; };
+		428A847D276311CC0090A741 /* NoMatchingObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoMatchingObjects.h; sourceTree = "<group>"; };
+		428A847E276311CC0090A741 /* EDAContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EDAContainer.m; sourceTree = "<group>"; };
+		428A84992763158C0090A741 /* Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commons.swift; sourceTree = "<group>"; };
+		428A84A527631AA70090A741 /* BullpenConsumer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullpenConsumer.swift; sourceTree = "<group>"; };
 		42BA07992737BA0700A53B86 /* PitchLetterGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchLetterGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -39,6 +198,8 @@
 		427B80D7273774D9002B5C03 = {
 			isa = PBXGroup;
 			children = (
+				428A83DC27630F7B0090A741 /* XSD */,
+				428A836227630E700090A741 /* ExternalLibraries */,
 				427B80E2273774D9002B5C03 /* Bullpen */,
 				427B80E1273774D9002B5C03 /* Products */,
 			);
@@ -55,6 +216,9 @@
 		427B80E2273774D9002B5C03 /* Bullpen */ = {
 			isa = PBXGroup;
 			children = (
+				428A83DB27630F430090A741 /* Bullpen-Bridging-Header.h */,
+				428A84992763158C0090A741 /* Commons.swift */,
+				428A84A527631AA70090A741 /* BullpenConsumer.swift */,
 				427B80E3273774D9002B5C03 /* AppDelegate.swift */,
 				427B80E5273774D9002B5C03 /* ViewController.swift */,
 				42BA07992737BA0700A53B86 /* PitchLetterGenerator.swift */,
@@ -64,6 +228,204 @@
 				427B80ED273774DB002B5C03 /* Bullpen.entitlements */,
 			);
 			path = Bullpen;
+			sourceTree = "<group>";
+		};
+		428A836227630E700090A741 /* ExternalLibraries */ = {
+			isa = PBXGroup;
+			children = (
+				428A84532763113D0090A741 /* ErrorTrace */,
+				428A8406276311230090A741 /* NetworkKit */,
+				428A8418276311230090A741 /* StompKit */,
+				428A842F276311230090A741 /* StompMapping */,
+				428A83E5276311220090A741 /* xoc */,
+			);
+			path = ExternalLibraries;
+			sourceTree = "<group>";
+		};
+		428A83DC27630F7B0090A741 /* XSD */ = {
+			isa = PBXGroup;
+			children = (
+				428A83DD27630FBE0090A741 /* Classes */,
+			);
+			path = XSD;
+			sourceTree = "<group>";
+		};
+		428A83DD27630FBE0090A741 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				428A8460276311CC0090A741 /* EDAContainer */,
+				428A83DE27630FD70090A741 /* Bullpen.xoc */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		428A83E5276311220090A741 /* xoc */ = {
+			isa = PBXGroup;
+			children = (
+				428A83E6276311220090A741 /* xoc.m */,
+				428A83E7276311220090A741 /* sample_build_script.txt */,
+				428A83E8276311220090A741 /* xoc-libxml.h */,
+				428A83E9276311220090A741 /* Marshalling */,
+				428A83F6276311220090A741 /* Exceptions */,
+				428A83FD276311220090A741 /* xoc.h */,
+				428A83FE276311220090A741 /* Support */,
+				428A8405276311220090A741 /* XocGeneratedClass.h */,
+			);
+			path = xoc;
+			sourceTree = "<group>";
+		};
+		428A83E9276311220090A741 /* Marshalling */ = {
+			isa = PBXGroup;
+			children = (
+				428A83EA276311220090A741 /* xoc-plist.h */,
+				428A83EB276311220090A741 /* XSDTimeParser.h */,
+				428A83EC276311220090A741 /* xoc-64.m */,
+				428A83ED276311220090A741 /* xoc-unmarshall.h */,
+				428A83EE276311220090A741 /* XSDDateParser.h */,
+				428A83EF276311220090A741 /* xoc-marshall.h */,
+				428A83F0276311220090A741 /* xoc-64.h */,
+				428A83F1276311220090A741 /* xoc-plist.m */,
+				428A83F2276311220090A741 /* XSDTimeParser.m */,
+				428A83F3276311220090A741 /* xoc-unmarshall.m */,
+				428A83F4276311220090A741 /* XSDDateParser.m */,
+				428A83F5276311220090A741 /* xoc-marshall.m */,
+			);
+			path = Marshalling;
+			sourceTree = "<group>";
+		};
+		428A83F6276311220090A741 /* Exceptions */ = {
+			isa = PBXGroup;
+			children = (
+				428A83F7276311220090A741 /* XocException.m */,
+				428A83F8276311220090A741 /* XocStateException.m */,
+				428A83F9276311220090A741 /* XocParseException.h */,
+				428A83FA276311220090A741 /* XocStateException.h */,
+				428A83FB276311220090A741 /* XocException.h */,
+				428A83FC276311220090A741 /* XocParseException.m */,
+			);
+			path = Exceptions;
+			sourceTree = "<group>";
+		};
+		428A83FE276311220090A741 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				428A83FF276311220090A741 /* XocAnyElement.h */,
+				428A8400276311220090A741 /* xoc-facets.h */,
+				428A8401276311220090A741 /* XocArray.m */,
+				428A8402276311220090A741 /* XocAnyElement.m */,
+				428A8403276311220090A741 /* XocArray.h */,
+				428A8404276311220090A741 /* xoc-facets.m */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		428A8406276311230090A741 /* NetworkKit */ = {
+			isa = PBXGroup;
+			children = (
+				428A8407276311230090A741 /* NetworkException.h */,
+				428A8408276311230090A741 /* TCPSocket.h */,
+				428A8409276311230090A741 /* TCPStream.m */,
+				428A840A276311230090A741 /* UDPSocket.h */,
+				428A840B276311230090A741 /* TCPSocketServer_Config.h */,
+				428A840C276311230090A741 /* NetworkMatcher.h */,
+				428A840D276311230090A741 /* TCPSocketServer.m */,
+				428A840F276311230090A741 /* TCPSocketClient.h */,
+				428A8410276311230090A741 /* TCPStream.h */,
+				428A8411276311230090A741 /* TCPSocket.m */,
+				428A8412276311230090A741 /* NetworkException.m */,
+				428A8413276311230090A741 /* TCPSocketServer.h */,
+				428A8414276311230090A741 /* NetworkMatcher.m */,
+				428A8415276311230090A741 /* UDPSocket.m */,
+				428A8416276311230090A741 /* TCPSocketClient.m */,
+				428A8417276311230090A741 /* TLSClientSocket.h */,
+			);
+			path = NetworkKit;
+			sourceTree = "<group>";
+		};
+		428A8418276311230090A741 /* StompKit */ = {
+			isa = PBXGroup;
+			children = (
+				428A8419276311230090A741 /* StompFrame.h */,
+				428A841A276311230090A741 /* StompClient.m */,
+				428A841B276311230090A741 /* StompXMLConsumer.m */,
+				428A841C276311230090A741 /* StompException.h */,
+				428A841E276311230090A741 /* NSApplication+StompClient.h */,
+				428A841F276311230090A741 /* StompPipeline.h */,
+				428A8420276311230090A741 /* StompDefaultDelegate.m */,
+				428A8421276311230090A741 /* StompServer.h */,
+				428A8422276311230090A741 /* StompXocFrame.m */,
+				428A8423276311230090A741 /* StompConsumer.h */,
+				428A8424276311230090A741 /* StompServer+LocalConfig.h */,
+				428A8425276311230090A741 /* StompXMLConsumer.h */,
+				428A8426276311230090A741 /* StompClient.h */,
+				428A8427276311230090A741 /* StompException.m */,
+				428A8428276311230090A741 /* StompFrame.m */,
+				428A8429276311230090A741 /* StompPipeline.m */,
+				428A842A276311230090A741 /* NSApplication+StompClient.m */,
+				428A842B276311230090A741 /* StompDefaultDelegate.h */,
+				428A842C276311230090A741 /* StompXocFrame.h */,
+				428A842D276311230090A741 /* StompDelegate.h */,
+				428A842E276311230090A741 /* StompServer.m */,
+			);
+			path = StompKit;
+			sourceTree = "<group>";
+		};
+		428A842F276311230090A741 /* StompMapping */ = {
+			isa = PBXGroup;
+			children = (
+				428A8430276311230090A741 /* stomp.plist */,
+			);
+			path = StompMapping;
+			sourceTree = "<group>";
+		};
+		428A84532763113D0090A741 /* ErrorTrace */ = {
+			isa = PBXGroup;
+			children = (
+				428A84542763113D0090A741 /* ETErrorSpot.h */,
+				428A84552763113D0090A741 /* QLog.m */,
+				428A84562763113D0090A741 /* ETRaise.m */,
+				428A84572763113D0090A741 /* ETErrorSpot.m */,
+				428A84582763113D0090A741 /* ETRaise.h */,
+				428A84592763113D0090A741 /* QLog.h */,
+			);
+			path = ErrorTrace;
+			sourceTree = "<group>";
+		};
+		428A8460276311CC0090A741 /* EDAContainer */ = {
+			isa = PBXGroup;
+			children = (
+				428A8461276311CC0090A741 /* Dangerous.m */,
+				428A8462276311CC0090A741 /* Refrigerated.m */,
+				428A8463276311CC0090A741 /* Arrival.h */,
+				428A8464276311CC0090A741 /* OverWidth.h */,
+				428A8465276311CC0090A741 /* Cargo.h */,
+				428A8466276311CC0090A741 /* EDAPreplanRequest.m */,
+				428A8467276311CC0090A741 /* PreplanSpecification.m */,
+				428A8468276311CC0090A741 /* OverDimension.h */,
+				428A8469276311CC0090A741 /* VesselStowage.h */,
+				428A846A276311CC0090A741 /* OverLength.h */,
+				428A846B276311CC0090A741 /* EDAContainerRequest.h */,
+				428A846C276311CC0090A741 /* Location.m */,
+				428A846D276311CC0090A741 /* EDAContainer.h */,
+				428A846E276311CC0090A741 /* Departure.m */,
+				428A846F276311CC0090A741 /* NoMatchingObjects.m */,
+				428A8470276311CC0090A741 /* OverWidth.m */,
+				428A8471276311CC0090A741 /* Cargo.m */,
+				428A8472276311CC0090A741 /* Arrival.m */,
+				428A8473276311CC0090A741 /* Refrigerated.h */,
+				428A8474276311CC0090A741 /* Dangerous.h */,
+				428A8475276311CC0090A741 /* OverDimension.m */,
+				428A8476276311CC0090A741 /* VesselStowage.m */,
+				428A8477276311CC0090A741 /* PreplanSpecification.h */,
+				428A8478276311CC0090A741 /* EDAPreplanRequest.h */,
+				428A8479276311CC0090A741 /* Location.h */,
+				428A847A276311CC0090A741 /* EDAContainerRequest.m */,
+				428A847B276311CC0090A741 /* OverLength.m */,
+				428A847C276311CC0090A741 /* Departure.h */,
+				428A847D276311CC0090A741 /* NoMatchingObjects.h */,
+				428A847E276311CC0090A741 /* EDAContainer.m */,
+			);
+			path = EDAContainer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,7 +487,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				427B80E8273774DB002B5C03 /* Assets.xcassets in Resources */,
+				428A8451276311230090A741 /* stomp.plist in Resources */,
 				427B80EB273774DB002B5C03 /* Main.storyboard in Resources */,
+				428A8432276311230090A741 /* sample_build_script.txt in Resources */,
+				428A83DF27630FD70090A741 /* Bullpen.xoc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,9 +501,58 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				428A845A2763113D0090A741 /* QLog.m in Sources */,
+				428A845B2763113D0090A741 /* ETRaise.m in Sources */,
+				428A8488276311CC0090A741 /* Arrival.m in Sources */,
+				428A847F276311CC0090A741 /* Dangerous.m in Sources */,
+				428A844A276311230090A741 /* StompDefaultDelegate.m in Sources */,
+				428A843C276311230090A741 /* XocArray.m in Sources */,
+				428A8438276311230090A741 /* xoc-marshall.m in Sources */,
+				428A848C276311CC0090A741 /* OverLength.m in Sources */,
+				428A8486276311CC0090A741 /* OverWidth.m in Sources */,
+				428A8483276311CC0090A741 /* Location.m in Sources */,
+				428A8437276311230090A741 /* XSDDateParser.m in Sources */,
+				428A8485276311CC0090A741 /* NoMatchingObjects.m in Sources */,
+				428A843B276311230090A741 /* XocParseException.m in Sources */,
+				428A843E276311230090A741 /* xoc-facets.m in Sources */,
+				428A844B276311230090A741 /* StompXocFrame.m in Sources */,
+				428A8435276311230090A741 /* XSDTimeParser.m in Sources */,
+				428A8487276311CC0090A741 /* Cargo.m in Sources */,
+				428A8480276311CC0090A741 /* Refrigerated.m in Sources */,
+				428A8445276311230090A741 /* UDPSocket.m in Sources */,
+				428A8448276311230090A741 /* StompXMLConsumer.m in Sources */,
+				428A844F276311230090A741 /* NSApplication+StompClient.m in Sources */,
+				428A8482276311CC0090A741 /* PreplanSpecification.m in Sources */,
+				428A8442276311230090A741 /* TCPSocket.m in Sources */,
+				428A848B276311CC0090A741 /* EDAContainerRequest.m in Sources */,
+				428A848D276311CC0090A741 /* EDAContainer.m in Sources */,
+				428A8436276311230090A741 /* xoc-unmarshall.m in Sources */,
+				428A8433276311230090A741 /* xoc-64.m in Sources */,
+				428A8444276311230090A741 /* NetworkMatcher.m in Sources */,
+				428A8446276311230090A741 /* TCPSocketClient.m in Sources */,
+				428A843F276311230090A741 /* TCPStream.m in Sources */,
+				428A8434276311230090A741 /* xoc-plist.m in Sources */,
+				428A8484276311CC0090A741 /* Departure.m in Sources */,
+				428A848A276311CC0090A741 /* VesselStowage.m in Sources */,
 				427B80E6273774D9002B5C03 /* ViewController.swift in Sources */,
+				428A84A627631AA70090A741 /* BullpenConsumer.swift in Sources */,
+				428A8481276311CC0090A741 /* EDAPreplanRequest.m in Sources */,
+				428A844E276311230090A741 /* StompPipeline.m in Sources */,
+				428A843D276311230090A741 /* XocAnyElement.m in Sources */,
+				428A845C2763113D0090A741 /* ETErrorSpot.m in Sources */,
+				428A8450276311230090A741 /* StompServer.m in Sources */,
+				428A8439276311230090A741 /* XocException.m in Sources */,
+				428A8489276311CC0090A741 /* OverDimension.m in Sources */,
+				428A8440276311230090A741 /* TCPSocketServer.m in Sources */,
+				428A8447276311230090A741 /* StompClient.m in Sources */,
+				428A843A276311230090A741 /* XocStateException.m in Sources */,
 				42BA079A2737BA0700A53B86 /* PitchLetterGenerator.swift in Sources */,
+				428A8443276311230090A741 /* NetworkException.m in Sources */,
+				428A849A2763158C0090A741 /* Commons.swift in Sources */,
+				428A8431276311230090A741 /* xoc.m in Sources */,
+				428A844D276311230090A741 /* StompFrame.m in Sources */,
 				427B80E4273774D9002B5C03 /* AppDelegate.swift in Sources */,
+				428A844C276311230090A741 /* StompException.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +626,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "Bullpen/Bullpen-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -265,6 +680,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "Bullpen/Bullpen-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
@@ -284,7 +700,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.trapac.Bullpen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -307,7 +723,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.trapac.Bullpen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

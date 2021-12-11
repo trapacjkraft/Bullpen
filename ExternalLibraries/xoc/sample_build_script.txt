@@ -1,0 +1,49 @@
+#
+#  Script for processing an XSD file using xoc, from within xcode.
+#  Copyright 2012-2013 Karl Kraft
+#  Version 2013-Aug-21
+#
+
+
+
+#
+#  Find the users install of xoc.
+#  If the user has does not have xoc installed, then just go with the contents of the source tree.
+#
+
+if [ -f $HOME/.profile ]; then
+. $HOME/.profile
+fi
+
+export xocpath=`which xoc`
+
+if [ "$xocpath" == ""  ]; then
+echo XOC not installed
+exit 0
+fi
+
+#
+#  Create the target directory and set it as the CWD
+#
+if [ ! -d ${SRCROOT}/XSD/Classes ]; then
+mkdir ${SRCROOT}/XSD/Classes
+fi
+
+cd ${SRCROOT}/XSD/Classes
+
+#
+#  Put each XSD file into a subdirectory
+#
+export DIRECTORY_PER_XSD=YES
+
+#
+# xoc knows that it is being called by xcode, and will iterate over
+# the Input Files, treating them as XSD files.
+#
+# If an output file is listed, then only those output files will be created
+# Otherwise a full conversion is done
+#
+
+$xocpath
+
+exit $?

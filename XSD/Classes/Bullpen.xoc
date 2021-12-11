@@ -1,0 +1,6 @@
+<XocConfig>
+  <XocSchema>
+    <Path>EnterpriseDataAccess/EDAContainer.xsd</Path>
+  </XocSchema>
+</XocConfig>
+
