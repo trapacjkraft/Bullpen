@@ -26,9 +26,6 @@ class PitchLetterGenerator: NSObject {
     var pitchInContainerNames = [String]()
     var pitchOutContainerNames = [String]()
     
-    var pitchInContainers = [EDAContainer]()
-    var pitchOutContainers = [EDAContainer]()
-
     var nmoReceived = false
     
     var df = DateFormatter()
@@ -78,18 +75,21 @@ class PitchLetterGenerator: NSObject {
         guard !nmoReceived else {
             let alert = NSAlert()
             alert.messageText = "Invalid container(s)!"
-            let info = nmos.joined(separator: ", ")
+            let info = CommonVariables.sharedInstance.nmos.joined(separator: ", ")
             alert.informativeText = "The following containers in your lists are invalid: \n \(info).\n\nPlease check the container IDs and try again."
             alert.runModal()
-            edaContainers.removeAll()
-            nmos.removeAll()
+            CommonVariables.sharedInstance.edaContainers.removeAll()
+            CommonVariables.sharedInstance.nmos.removeAll()
             nmoReceived = false
             return
         }
         
+        var pitchInContainers = [EDAContainer]()
+        var pitchOutContainers = [EDAContainer]()
+        
         // Filter the edaContainers by list
-        self.pitchInContainers = edaContainers.filter( { self.pitchInContainerNames.contains($0.name) } )
-        self.pitchOutContainers = edaContainers.filter( { self.pitchOutContainerNames.contains($0.name) } )
+        pitchInContainers = CommonVariables.sharedInstance.edaContainers.filter( { self.pitchInContainerNames.contains($0.name) } )
+        pitchOutContainers = CommonVariables.sharedInstance.edaContainers.filter( { self.pitchOutContainerNames.contains($0.name) } )
         
         // Create the root element
 
@@ -368,6 +368,12 @@ class PitchLetterGenerator: NSObject {
             }
         }
         
+        
+        CommonVariables.sharedInstance.edaContainers.removeAll()
+        CommonVariables.sharedInstance.nmos.removeAll()
+        CommonVariables.sharedInstance.pitchInCount = 0
+        CommonVariables.sharedInstance.pitchOutCount = 0
+        CommonVariables.sharedInstance.readyToGenerate = false
         
         
     }

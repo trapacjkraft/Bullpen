@@ -17,13 +17,21 @@ let TempQueueName = "/temp-queue/bullpen-temp-eda-queue"
 
 let bullpenConsumer = BullpenConsumer()
 
-var pitchInCount = 0
-var pitchOutCount = 0
 
-var readyToGenerate = false
+struct CommonVariables {
+    
+    static var sharedInstance = CommonVariables()
+    
+    private init() {}
+    
+    var pitchInCount = 0
+    var pitchOutCount = 0
 
-var edaContainers = [EDAContainer]()
-var nmos = [String]()
+    var readyToGenerate = false
+
+    var edaContainers = [EDAContainer]()
+    var nmos = [String]()
+}
 
 func stompClient() -> StompClient {
     return NSApplication.shared.stompClient

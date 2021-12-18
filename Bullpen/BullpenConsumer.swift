@@ -12,9 +12,9 @@ import Cocoa
 
     @objc func receiveEDAContainer(_ eda: EDAContainer) {
         DispatchQueue.main.async {
-            if !edaContainers.contains(eda) {
-                edaContainers.append(eda)
-                if edaContainers.count + nmos.count == pitchInCount + pitchOutCount {
+            if !CommonVariables.sharedInstance.edaContainers.contains(eda) {
+                CommonVariables.sharedInstance.edaContainers.append(eda)
+                if CommonVariables.sharedInstance.edaContainers.count + CommonVariables.sharedInstance.nmos.count == CommonVariables.sharedInstance.pitchInCount + CommonVariables.sharedInstance.pitchOutCount {
                     NotificationCenter.default.post(name: .allEDARequestsReceived, object: nil)
                 }
             }
@@ -22,13 +22,12 @@ import Cocoa
     }
     
     @objc func receiveNoMatchingObjects(_ nmo: NoMatchingObjects) {
-        print("Received NoMatchingObject with content: \(nmo.content ?? "none")\n\n")
         DispatchQueue.main.async {
-            if !nmos.contains(nmo.content) {
-                nmos.append(nmo.content)
+            if !CommonVariables.sharedInstance.nmos.contains(nmo.content) {
+                CommonVariables.sharedInstance.nmos.append(nmo.content)
                 NotificationCenter.default.post(name: .nmoReceived, object: nil)
             }
-            if edaContainers.count + nmos.count == pitchInCount + pitchOutCount {
+            if CommonVariables.sharedInstance.edaContainers.count + CommonVariables.sharedInstance.nmos.count == CommonVariables.sharedInstance.pitchInCount + CommonVariables.sharedInstance.pitchOutCount {
                 NotificationCenter.default.post(name: .allEDARequestsReceived, object: nil)
             }
         }
@@ -40,6 +39,10 @@ import Cocoa
             return
         }
         print("Unsupported message \(nodeName)")
+    }
+    
+    override func thread() -> Thread! {
+        return Thread.main
     }
     
 }

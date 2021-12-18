@@ -76,7 +76,7 @@ class ViewController: NSViewController {
         
         // Create an array of container names by separating the text field on newlines. If this fails, create an empty array.
         // Loop through the array and find any empty lines that may have arrived from copy-pasting or extra lines in lists, and remove empty entries.
-        
+                
         var pitchInContainerNames = pitchInTextView.textContainer?.textView?.string.components(separatedBy: "\n") ?? []
         
         var emptyIndex = [Int]()
@@ -91,7 +91,7 @@ class ViewController: NSViewController {
             pitchInContainerNames.remove(at: index)
         }
         
-        pitchInCount = pitchInContainerNames.count
+        CommonVariables.sharedInstance.pitchInCount = pitchInContainerNames.count
         
         // Reset the index tracker and repeat the above process for the pitch out containers.
         
@@ -109,7 +109,7 @@ class ViewController: NSViewController {
             pitchOutContainerNames.remove(at: index)
         }
         
-        pitchOutCount = pitchOutContainerNames.count
+        CommonVariables.sharedInstance.pitchOutCount = pitchOutContainerNames.count
 
         // Use a date formatter to format the strings for LiftStart and LiftEnd
         // Use the UTC time zone to automatically convert from the user's time

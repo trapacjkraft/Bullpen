@@ -31,6 +31,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, StompDelegate {
         stompClient().delegate = self
         stompClient().add(bullpenConsumer, forDestination: TempQueueName, withSelector: nil, prefetchSize: 1000)
         
+        
+        
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
