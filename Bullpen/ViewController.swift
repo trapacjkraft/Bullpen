@@ -79,6 +79,14 @@ class ViewController: NSViewController {
                 
         var pitchInContainerNames = pitchInTextView.textContainer?.textView?.string.components(separatedBy: "\n") ?? []
         
+        // Depending on where the list is copied, sometimes \r escape characters are included. Strip these.
+        
+        for (index, container) in pitchInContainerNames.enumerated() {
+            if container.contains("\r") {
+                pitchInContainerNames[index] = container.replacingOccurrences(of: "\r", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
+            }
+        }
+
         var emptyIndex = [Int]()
         
         for (i, container) in pitchInContainerNames.enumerated() {
@@ -98,6 +106,15 @@ class ViewController: NSViewController {
         emptyIndex.removeAll()
         
         var pitchOutContainerNames = pitchOutTextView.textContainer?.textView?.string.components(separatedBy: "\n") ?? []
+        
+        // Depending on where the list is copied, sometimes \r escape characters are included. Strip these.
+        
+        for (index, container) in pitchOutContainerNames.enumerated() {
+            if container.contains("\r") {
+                pitchOutContainerNames[index] = container.replacingOccurrences(of: "\r", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
+            }
+        }
+
         
         for (i, container) in pitchOutContainerNames.enumerated() {
             if container.isEmpty {
